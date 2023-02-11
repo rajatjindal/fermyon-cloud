@@ -67,3 +67,4 @@ jobs:
 
 - Undeploy preview when PR is closed (merged or otherwise)
 - Restrict the permissions of GITHUB_TOKEN
+- Add tests
