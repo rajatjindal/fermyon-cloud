@@ -1,5 +1,5 @@
 {
-  "name": "fermyon-cloud-preview",
+  "name": "fermyon-preview-deploy",
   "version": "0.0.1",
   "private": true,
   "description": "This action deploys preview of spin apps to Fermyon cloud",
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rajatjindal/fermyon-cloud-preview.git"
+    "url": "git+https://github.com/rajatjindal/fermyon-preview-deploy.git"
   },
   "keywords": [
     "actions",
