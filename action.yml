@@ -1,0 +1,13 @@
+name: 'Rajat Jindal'
+description: 'downloads and add fermyon/spin to your PATH'
+author: 'Rajat Jindal'
+inputs:
+  github_token:
+    required: true
+    description: 'to update comment on pr'
+  fermyon_token_file_name:
+    required: false
+    description: 'file that contains fermyon token details, defaults to config.json (expect the file to be in ${GITHUB_WORKSPACE} dir)'
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
