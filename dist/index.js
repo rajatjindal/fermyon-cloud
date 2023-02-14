@@ -23665,7 +23665,7 @@ const extractMetadataFromLogs = function (appName, logs) {
         version = m[1];
     }
     let routeStart = false;
-    const routeMatcher = `^(.*): (https?:\/\/[^\s^(]+)(.*)`;
+    const routeMatcher = `^(.*): (https?:\/\/[^\\s^(]+)(.*)`;
     const lines = logs.split("\n");
     let routes = new Array();
     let base = '';
