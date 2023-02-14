@@ -23780,6 +23780,7 @@ const github_1 = __nccwpck_require__(978);
 function run() {
     var _a;
     return __awaiter(this, void 0, void 0, function* () {
+        core.info(`${JSON.stringify(github.context.payload)}`);
         try {
             if (!github.context.payload.pull_request) {
                 throw `this action currently support deploying apps on PR only`;

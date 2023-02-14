@@ -5,6 +5,7 @@ import * as io from '@actions/io'
 import { GithubClient } from './github'
 
 async function run(): Promise<void> {
+  core.info(`${JSON.stringify(github.context.payload)}`)
   try {
     if (!github.context.payload.pull_request) {
       throw `this action currently support deploying apps on PR only`
