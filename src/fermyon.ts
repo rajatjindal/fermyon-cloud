@@ -190,7 +190,7 @@ export const extractMetadataFromLogs = function (appName: string, logs: string):
     }
 
     let routeStart = false;
-    const routeMatcher = `^(.*): (https?:\/\/[^\s^(]+)(.*)`
+    const routeMatcher = `^(.*): (https?:\/\/[^\\s^(]+)(.*)`
     const lines = logs.split("\n")
     let routes = new Array<Route>();
     let base = '';
