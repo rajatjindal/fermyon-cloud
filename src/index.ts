@@ -5,7 +5,6 @@ import * as io from '@actions/io'
 import { GithubClient } from './github'
 
 async function run(): Promise<void> {
-  core.info(`${JSON.stringify(github.context.payload)}`)
   try {
     if (!github.context.payload.pull_request) {
       throw `this action currently support deploying apps on PR only`
@@ -37,6 +36,18 @@ async function run(): Promise<void> {
     core.info("checking if have room to deploy this preview")
     const apps = await fermyonClient.getAllApps()
     const thisPreviewExists = apps.find(item => item.name === previewAppName)
+
+    // for when PR is closed
+    if (github.context.action === 'closed') {
+      if (!thisPreviewExists) {
+        core.info(`no preview found for pr ${currentPRNumber}`)
+        return
+      }
+
+      core.info(`cleaning up preview for pr ${currentPRNumber}`)
+      await fermyonClient.deleteAppByName(previewAppName)
+      return
+    }
 
     if (!thisPreviewExists && apps.length >= 5) {
       if (core.getInput("overwrite_old_previews") !== 'true') {
