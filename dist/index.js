@@ -23579,8 +23579,8 @@ class FermyonClient {
     deleteAppById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const resp = yield this._httpclient.get(`${this.base}/api/apps`);
-            if (resp.message.statusCode !== 201) {
-                throw `expexted code ${201}, got ${resp.message.statusCode}`;
+            if (resp.message.statusCode !== httpm.HttpCodes.OK) {
+                throw `expexted code ${httpm.HttpCodes.OK}, got ${resp.message.statusCode}`;
             }
         });
     }
