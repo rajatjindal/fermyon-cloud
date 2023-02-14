@@ -23804,9 +23804,9 @@ function run() {
             core.info("checking if have room to deploy this preview");
             const apps = yield fermyonClient.getAllApps();
             const thisPreviewExists = apps.find(item => item.name === previewAppName);
-            core.info(`action is ${github.context.action}, previewExists: ${thisPreviewExists}`);
+            core.info(`action is ${github.context.payload.action}, previewExists: ${thisPreviewExists}`);
             // for when PR is closed
-            if (github.context.action === 'closed') {
+            if (github.context.payload.action === 'closed') {
                 if (!thisPreviewExists) {
                     core.info(`no preview found for pr ${currentPRNumber}`);
                     return;
