@@ -1,0 +1,10 @@
+name: 'Rajat Jindal'
+description: 'given a Fermyon Cloud token, creates a config file compatible with spin deploy'
+author: 'Rajat Jindal'
+inputs:
+  fermyon_token:
+    required: true
+    description: 'the token that will be used for creating token file for Spin to use with Fermyon Cloud'
+runs:
+  using: 'node16'
+  main: '../dist/login/index.js'

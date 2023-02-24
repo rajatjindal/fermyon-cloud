@@ -110,6 +110,15 @@ export class FermyonClient {
         this.deleteAppById(appId)
     }
 
+    async deploy(appName: string, spinTomlFile: string): Promise<Metadata> {
+        const result = await exec.getExecOutput("spin", ["deploy", "--file", spinTomlFile])
+        if (result.exitCode != 0) {
+            throw `deploy failed with [status_code: ${result.exitCode}] [stdout: ${result.stdout}] [stderr: ${result.stderr}] `
+        }
+
+        return extractMetadataFromLogs(appName, result.stdout)
+    }
+
     async deployAs(realAppName: string, previewAppName: string): Promise<Metadata> {
         const previewTomlFile = `${previewAppName}-spin.toml`
         await io.cp("spin.toml", previewTomlFile)
@@ -127,12 +136,7 @@ export class FermyonClient {
             });
         });
 
-        const result = await exec.getExecOutput("spin", ["deploy", "--file", previewTomlFile])
-        if (result.exitCode != 0) {
-            throw `deploy failed with [status_code: ${result.exitCode}] [stdout: ${result.stdout}] [stderr: ${result.stderr}] `
-        }
-
-        return extractMetadataFromLogs(previewAppName, result.stdout)
+        return this.deploy(previewAppName, previewTomlFile)
     }
 }
 

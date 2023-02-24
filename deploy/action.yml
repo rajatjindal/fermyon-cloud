@@ -1,0 +1,10 @@
+name: 'Rajat Jindal'
+description: 'deploys a spin app to Fermyon cloud'
+author: 'Rajat Jindal'
+inputs:
+  fermyon_token:
+    required: true
+    description: 'the token that will be used for deploying to Fermyon Cloud'
+runs:
+  using: 'node16'
+  main: '../dist/deploy/index.js'

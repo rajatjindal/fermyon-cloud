@@ -1,21 +1,21 @@
 {
-  "name": "fermyon-preview-deploy",
+  "name": "fermyon-cloud",
   "version": "0.0.1",
   "private": true,
-  "description": "This action deploys preview of spin apps to Fermyon cloud",
+  "description": "This action provides github actions for Fermyon Cloud",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
     "format": "prettier --write '**/*.ts'",
     "format-check": "prettier --check '**/*.ts'",
     "lint": "eslint src/**/*.ts",
-    "package": "ncc build src/index.ts",
+    "package": "ncc build -o dist/login src/login.ts && ncc build -o dist/deploy src/deploy.ts && ncc build -o dist/pr-preview src/pr-preview.ts ",
     "test": "jest",
     "all": "npm run build && npm run format && npm run package"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rajatjindal/fermyon-preview-deploy.git"
+    "url": "git+https://github.com/rajatjindal/fermyon-cloud.git"
   },
   "keywords": [
     "actions",

@@ -1,0 +1,10 @@
+name: 'Rajat Jindal'
+description: 'deploys the preview of PR to Fermyon Cloud'
+author: 'Rajat Jindal'
+inputs:
+  fermyon_token:
+    required: false
+    description: 'the token that will be used for deploying preview to Fermyon Cloud'
+runs:
+  using: 'node16'
+  main: '../dist/pr-preview/index.js'
