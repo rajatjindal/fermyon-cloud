@@ -24,11 +24,17 @@ async function run(): Promise<void> {
     await fermyon.setupSpin()
 
     core.info(":ticket: configuring token for spin auth")
-    const inputTokenFile = `${process.env.GITHUB_WORKSPACE}/${core.getInput('fermyon_token_file_name')}`
-    const defaultInputTokenFile = `${process.env.GITHUB_WORKSPACE}/config.json`
-    const tokenFile = inputTokenFile && inputTokenFile !== '' ? inputTokenFile : defaultInputTokenFile
-    await io.mkdirP(fermyon.DEFAULT_TOKEN_DIR)
-    await io.cp(tokenFile, fermyon.DEFAULT_TOKEN_FILE)
+    if (core.getInput('fermyon_token') !== '') {
+      await fermyon.createTokenFile(core.getInput('fermyon_token'))
+    } else if (core.getInput('fermyon_token_file_name') !== '') {
+      //we can remove this later
+      const inputTokenFile = `${process.env.GITHUB_WORKSPACE}/${core.getInput('fermyon_token_file_name')}`
+      const defaultInputTokenFile = `${process.env.GITHUB_WORKSPACE}/config.json`
+      const tokenFile = inputTokenFile && inputTokenFile !== '' ? inputTokenFile : defaultInputTokenFile
+      await fermyon.configureTokenFile(tokenFile)
+    } else {
+      throw `atleast one of 'fermyon_token_file_name' or 'fermyon_token' should be provided`
+    }
 
     core.info(":cloud: creating Fermyon client")
     const fermyonClient = fermyon.initClient()

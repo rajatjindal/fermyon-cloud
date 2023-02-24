@@ -8,6 +8,9 @@ inputs:
   fermyon_token_file_name:
     required: false
     description: 'file that contains fermyon token details, defaults to config.json (expect the file to be in ${GITHUB_WORKSPACE} dir)'
+  fermyon_token:
+    required: false
+    description: 'the fermyon token that will be used for deploying to Fermyon cloud'
 runs:
   using: 'node16'
   main: 'dist/index.js'

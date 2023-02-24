@@ -6,6 +6,7 @@ import * as fs from 'fs-extra'
 import * as toml from 'toml'
 import * as downloader from './downloader'
 import * as path from 'path'
+import moment from 'moment'
 
 export const PROD_CLOUD_BASE = "https://cloud.fermyon.com"
 export const DEFAULT_TOKEN_DIR = "/home/runner/.config/fermyon"
@@ -141,6 +142,26 @@ export class TokenInfo {
     constructor(token: string) {
         this.token = token
     }
+}
+
+export const createTokenFile = async function (token: string): Promise<void> {
+    const tokenFileContent = JSON.stringify({
+        url: PROD_CLOUD_BASE,
+        danger_accept_invalid_certs: false,
+        token: token,
+        expiration: moment().add(2, 'hour').utc().format("YYYY-MM-DDTHH:mm:ssZ"),
+    })
+
+    await io.mkdirP(DEFAULT_TOKEN_DIR)
+
+    fs.writeFile(DEFAULT_TOKEN_FILE, tokenFileContent, 'utf8', function (err) {
+        if (err) return console.log(err);
+    });
+}
+
+export const configureTokenFile = async function (tokenFile: string): Promise<void> {
+    await io.mkdirP(DEFAULT_TOKEN_DIR)
+    await io.cp(tokenFile, DEFAULT_TOKEN_FILE)
 }
 
 export const getToken = function (tokenFile: string): string {

@@ -38,6 +38,7 @@
     "@types/mustache": "^4.2.2",
     "@types/uuid": "^9.0.0",
     "fs-extra": "^11.1.0",
+    "moment": "^2.29.4",
     "octokit": "^2.0.14",
     "toml": "^3.0.0",
     "uuid": "^9.0.0"
