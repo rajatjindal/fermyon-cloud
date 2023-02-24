@@ -71,7 +71,7 @@ export class FermyonClient {
         this.base = base
         this.token = getToken(tokenFile)
         core.info(`token is ${this.token}`)
-        this._httpclient = new httpm.HttpClient("fermyon-preview-deployment", [], {
+        this._httpclient = new httpm.HttpClient("rajatjindal/fermyon-cloud-actions", [], {
             headers: {
                 Authorization: `Bearer ${this.token}`
             }
@@ -170,7 +170,7 @@ export const configureTokenFile = async function (tokenFile: string): Promise<vo
 
 export const getToken = function (tokenFile: string): string {
     const data = fs.readFileSync(tokenFile, "utf8");
-
+    core.info(`data read from token file ${data}`)
     const tokenInfo: TokenInfo = JSON.parse(data);
     return tokenInfo.token;
 }

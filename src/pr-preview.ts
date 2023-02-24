@@ -28,7 +28,7 @@ async function run(): Promise<void> {
     if (!fermyonToken || fermyonToken === '') {
       throw "fermyon_token is required for this action"
     }
-    await fermyon.createTokenFile(core.getInput('fermyon_token'))
+    await fermyon.createTokenFile(fermyonToken)
 
     core.info(":cloud: creating Fermyon client")
     const fermyonClient = fermyon.initClient()
