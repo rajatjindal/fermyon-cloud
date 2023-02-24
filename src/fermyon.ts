@@ -159,7 +159,7 @@ export const createTokenFile = async function (token: string): Promise<void> {
     await io.mkdirP(DEFAULT_TOKEN_DIR)
 
     fs.writeFile(DEFAULT_TOKEN_FILE, tokenFileContent, 'utf8', function (err) {
-        if (err) return console.log(err);
+        if (err) return core.error(err);
     });
 }
 

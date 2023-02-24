@@ -20257,7 +20257,7 @@ const createTokenFile = function (token) {
         yield io.mkdirP(exports.DEFAULT_TOKEN_DIR);
         fs.writeFile(exports.DEFAULT_TOKEN_FILE, tokenFileContent, 'utf8', function (err) {
             if (err)
-                return console.log(err);
+                return core.error(err);
         });
     });
 };
