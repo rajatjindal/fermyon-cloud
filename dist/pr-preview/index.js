@@ -29299,17 +29299,10 @@ class FermyonClient {
         return __awaiter(this, void 0, void 0, function* () {
             const previewTomlFile = `${previewAppName}-spin.toml`;
             yield io.cp("spin.toml", previewTomlFile);
-            fs.readFile(previewTomlFile, 'utf8', function (err, data) {
-                if (err) {
-                    return console.log(err);
-                }
-                const re = new RegExp(`name = "${realAppName}"`, "g");
-                var result = data.replace(re, `name = "${previewAppName}"`);
-                fs.writeFile(previewTomlFile, result, 'utf8', function (err) {
-                    if (err)
-                        return console.log(err);
-                });
-            });
+            const data = fs.readFileSync(previewTomlFile, 'utf8');
+            const re = new RegExp(`name = "${realAppName}"`, "g");
+            var result = data.replace(re, `name = "${previewAppName}"`);
+            fs.writeFileSync(previewTomlFile, result, 'utf8');
             return this.deploy(previewAppName, previewTomlFile);
         });
     }
@@ -29330,10 +29323,7 @@ const createTokenFile = function (token) {
             expiration: (0, moment_1.default)().add(2, 'hour').utc().format("YYYY-MM-DDTHH:mm:ssZ"),
         });
         yield io.mkdirP(exports.DEFAULT_TOKEN_DIR);
-        fs.writeFile(exports.DEFAULT_TOKEN_FILE, tokenFileContent, 'utf8', function (err) {
-            if (err)
-                return core.error(err);
-        });
+        fs.writeFileSync(exports.DEFAULT_TOKEN_FILE, tokenFileContent, 'utf8');
     });
 };
 exports.createTokenFile = createTokenFile;

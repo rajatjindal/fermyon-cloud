@@ -123,18 +123,10 @@ export class FermyonClient {
         const previewTomlFile = `${previewAppName}-spin.toml`
         await io.cp("spin.toml", previewTomlFile)
 
-        fs.readFile(previewTomlFile, 'utf8', function (err, data) {
-            if (err) {
-                return console.log(err);
-            }
-
-            const re = new RegExp(`name = "${realAppName}"`, "g")
-            var result = data.replace(re, `name = "${previewAppName}"`);
-
-            fs.writeFile(previewTomlFile, result, 'utf8', function (err) {
-                if (err) return console.log(err);
-            });
-        });
+        const data = fs.readFileSync(previewTomlFile, 'utf8');
+        const re = new RegExp(`name = "${realAppName}"`, "g")
+        var result = data.replace(re, `name = "${previewAppName}"`);
+        fs.writeFileSync(previewTomlFile, result, 'utf8');
 
         return this.deploy(previewAppName, previewTomlFile)
     }
@@ -158,9 +150,7 @@ export const createTokenFile = async function (token: string): Promise<void> {
 
     await io.mkdirP(DEFAULT_TOKEN_DIR)
 
-    fs.writeFile(DEFAULT_TOKEN_FILE, tokenFileContent, 'utf8', function (err) {
-        if (err) return core.error(err);
-    });
+    fs.writeFileSync(DEFAULT_TOKEN_FILE, tokenFileContent, 'utf8');
 }
 
 export const configureTokenFile = async function (tokenFile: string): Promise<void> {
