@@ -2,8 +2,11 @@ name: 'Rajat Jindal'
 description: 'deploys the preview of PR to Fermyon Cloud'
 author: 'Rajat Jindal'
 inputs:
+  github_token:
+    required: true
+    description: 'the token will be used to update  preview URL on Github PR'
   fermyon_token:
-    required: false
+    required: true
     description: 'the token that will be used for deploying preview to Fermyon Cloud'
 runs:
   using: 'node16'
