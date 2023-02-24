@@ -38,7 +38,7 @@ async function run(): Promise<void> {
     const thisPreviewExists = apps.find(item => item.name === previewAppName)
 
     // for when PR is closed
-    if (github.context.payload.action === 'closed') {
+    if (core.getInput('undeploy') === 'true') {
       if (!thisPreviewExists) {
         core.info(`no preview found for pr ${currentPRNumber}`)
         return
