@@ -20170,7 +20170,6 @@ class FermyonClient {
     constructor(base, tokenFile) {
         this.base = base;
         this.token = (0, exports.getToken)(tokenFile);
-        core.info(`token is ${this.token}`);
         this._httpclient = new httpm.HttpClient("rajatjindal/fermyon-cloud-actions", [], {
             headers: {
                 Authorization: `Bearer ${this.token}`
@@ -20261,7 +20260,6 @@ const configureTokenFile = function (tokenFile) {
 exports.configureTokenFile = configureTokenFile;
 const getToken = function (tokenFile) {
     const data = fs.readFileSync(tokenFile, "utf8");
-    core.info(`data read from token file ${data}`);
     const tokenInfo = JSON.parse(data);
     return tokenInfo.token;
 };
